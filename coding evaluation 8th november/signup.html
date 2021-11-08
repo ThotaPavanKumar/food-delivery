@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>signup</title>
+    <style>
+        body {
+            background-color: rgb(243, 242, 250);
+        }
+       form {
+          width: 100px;
+       }
+       input {
+           border: 1px solid teal;
+           height: 25px;
+           margin: 5px;
+       }
+       h1 {
+           color: rgb(9, 9, 128);
+           text-align: center;
+           background-color: tomato;
+       }
+      #submit {
+          border: none;
+          justify-content: center;
+      }
+
+
+    </style>
+</head>
+<body>
+    <h1>Sign Up</h1>
+    <form onsubmit="signup(event)" action="" id="sign-up">
+        <label for="">Name</label>
+        <input type="text" name="" id="name" placeholder="name">
+        <label for="">email</label>
+        <input type="email" name="" id="email" placeholder="email">
+        <label for="">password</label>
+        <input type="password" name="" id="password" placeholder="password">
+        <label for="">username</label>
+        <input type="text" name="" id="username" placeholder="username">
+        <label for="">Mobile No:</label>
+        <input type="text" name="" id="mobile" placeholder="mobile">
+        <label for="">Description</label>
+        <input type="text" name="" id="description" placeholder="description">
+        <input type="submit" name="" id="submit" placeholder="submit">
+    </form>
+
+</body>
+</html>
+
+<script>
+
+   
+
+     function signup(e) {
+        e.preventDefault();
+
+        let  signupForm = document.getElementById("sign-up");
+        // console.log(1234);
+        console.log(e.target);
+
+        let userdata = {
+            name: signupForm.name.value, 
+            email: signupForm.email.value,
+            password: signupForm.password.value,
+            username: signupForm.username.value,
+            mobile: signupForm.mobile.value,
+            description: signupForm.description.value,
+        };  
+
+        console.log("userdata",userdata);
+
+        let datatosent = JSON.stringify(userdata);
+
+        console.log("datasent",datatosent);
+
+        
+
+        fetch("https://masai-api-mocker.herokuapp.com/auth/register", {
+
+            method: 'POST',
+
+            body: datatosent,
+
+            headers:{
+
+                 'Content-Type':'application/json',
+            },
+            })
+
+            .then((res) => {
+                console.log("res11",res);
+                return res.json();
+            }) 
+            .then((res) => {
+                console.log("res",res);
+                window.location.href = "login.html";
+            }) 
+            .catch((err) => {
+                console.log("err",err);
+            }) 
+        }
+        function login(e) {
+        e.preventDefault();
+
+        let  loginForm = document.getElementById("log-in");
+        // console.log(1234);
+        console.log(e.target);
+
+        let user_data = {
+            username: loginForm.username.value,
+            password: loginForm.password.value,
+        };  
+
+        console.log("userdata",user_data);
+
+        let data_to_sent = JSON.stringify(user_data);
+
+        console.log("datasent",data_to_sent);
+
+        
+
+        fetch("https://masai-api-mocker.herokuapp.com/auth/login", {
+            method : "POST",
+            body : data_to_sent,
+            headers : {
+                'Content-type' : 'application/json'
+            } 
+        })
+        .then((res) => {
+            return res.json();
+        })
+        .then((res) => {
+            console.log("res1",res);
+            fetchMyData(user_data.username,res.token);
+        })
+        .catch((err) => {
+            console.log("err",err);
+        })
+
+    }
+
+    function fetchMyData(user,token) {
+        console.log(user);
+        console.log(token);
+
+        fetch(`https://masai-api-mocker.herokuapp.com/user/${user}`, {
+            
+            headers : {
+                'Content-Type' : 'application/json',
+                'Authorization' : `Bearer ${token}`,
+            } ,
+        })
+        .then((res) => {
+            return res.json();
+        })
+        .then((res) => {
+            console.log("res2",res);
+            let name = res.name;
+            console.log("name",name);
+            window.localStorage.setItem("foodlogin", JSON.stringify(name));
+            window.location.href = "index.html";
+        })
+        .catch((err) => {
+            console.log("err",err);
+        })
+    }   
+    
+
+
+
+</script>

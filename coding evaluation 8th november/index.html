@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>index</title>
+    <style>
+        div > a,div > h2 {
+            display: inline-block;
+            margin: 10px;            
+        }
+        #anchor {
+            margin-left: 200px;
+        }
+    
+   
+    h1 {
+        text-align: center;
+    }
+    #menu:hover{
+        background-color: grey;
+        height: 400px;
+        width : 400px;
+    }
+    </style>        
+</head>
+<body>
+    
+    <h1>Home Page</h1>
+
+    <div id="anchor">
+        <!-- <h2>Menu</h2> -->
+        <a href="menu.html" id="menu"> <h2>Menu</h2></a>
+        <a href="signup.html" id="signup"><h2>Sign Up</h2></a>
+
+        <a href="login.html" id="login1"><h2>Login</h2></a>
+    
+        <a href="login.html" id="login"><h2>Login</h2></a>
+    </div>
+  
+
+
+
+</body>
+</html>
+
+<script>
+          
+     var signup = document.getElementById("signup");
+     var login = document.getElementById("login");
+     login1.style.display = "Login";
+     var login1 = document.getElementById("login1");
+    
+    
+     var name = JSON.parse(window.localStorage.getItem("foodlogin"));
+     console.log(name);
+     login.textContent = name;
+       
+     if(name != null) { 
+        login1.style.display = "none";
+     }
+     
+
+</script>

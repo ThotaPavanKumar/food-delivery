@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>menu</title>
+    <style>
+        h1 {
+            text-align: center;
+            color: tomato;
+            background-color: turquoise;
+        }
+        body {
+            background-color: rgb(236, 161, 20);
+        }
+        #container {
+            font-size: 24px;
+        }
+
+    </style>
+</head>
+<body>
+    <h1>Food Items</h1>
+    <div id="container" onclick="foodItems()">Dishes</div>
+    <ul>
+        <li>Meals</li>
+        <li>Starter</li>
+        <li>Desserts</li>
+        <li>Snacks</li>
+        <li>Sweets</li>
+    </ul>
+   
+
+    <div id="parent"></div>
+
+</body>
+</html>
+<script>
+
+// console.log(fetch("www.themealdb.com/api/json/v1/1/search.php?s=Arrabiata"));
+
+async function foodItems() {
+
+    let res = await fetch("www.themealdb.com/api/json/v1/1/filter.php?c=Seafood");
+    console.log("res",res);
+
+    let data = await res.json();
+
+    console.log("data",data);
+
+}
+
+
+</script>
